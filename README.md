@@ -2,22 +2,22 @@
 
 ## Contents
 
-Prereqs .................................................................................................................................................... 1
-Getting started ........................................................................................................................................ 1
-Workshop 1 – Inventory “microservice” on Docker ............................................................................... 4
-Run a SQL Server container ................................................................................................................ 4
-Get an API going .................................................................................................................................. 4
-Add Docker Support ............................................................................................................................ 5
-Take a copy of the DB and reset ......................................................................................................... 7
-Add docker-compose support ............................................................................................................ 8
-Workshop 2 – Push the Inventory microservice to AKS ......................................................................... 8
-Deploy an AKS cluster ......................................................................................................................... 8
-Set up your Docker Hub account ........................................................................................................ 9
-Make a release build of the microservice API ..................................................................................... 9
-Push your images to Docker Hub ...................................................................................................... 10
-Set up the KubeCtl tool ..................................................................................................................... 11
-Deploy our microservice to AKS ........................................................................................................ 12
-Workshop 3 – Make your own Container Registry (ACR) ..................................................................... 13
+Prereqs ........................................................................... 1
+Getting started ................................................................... 1
+Workshop 1 – Inventory “microservice” on Docker ................................... 4
+Run a SQL Server container ........................................................ 4
+Get an API going .................................................................. 4
+Add Docker Support ................................................................ 5
+Take a copy of the DB and reset ................................................... 7
+Add docker-compose support ........................................................ 8
+Workshop 2 – Push the Inventory microservice to ACS ............................... 8
+Deploy an ACS cluster ............................................................. 8
+Set up your Docker Hub account .................................................... 9
+Make a release build of the microservice API ...................................... 9
+Push your images to Docker Hub .................................................... 10
+Set up the KubeCtl tool ........................................................... 11
+Deploy our microservice to ACS .................................................... 12
+Workshop 3 – Make your own Container Registry (ACR) ............................... 13
 
 ## Prereqs
 
@@ -173,12 +173,12 @@ $ docker ps
     look up the hostname dockerdemodb and get back that container’s IP address. Same goes
     for any other container we run as part of this solution using docker-compose.
 
-## Workshop 2 – Push the Inventory microservice to AKS
+## Workshop 2 – Push the Inventory microservice to ACS
 
 We’re going to make a Docker Hub account, push our Docker images to Docker Hub and finally we’ll
-launch them to managed Kubernetes on Azure (AKS).
+launch them to Kubernetes on Azure (ACS).
 
-### Deploy an AKS cluster
+### Deploy an ACS Kubernetes cluster
 
 1. Open PowerShell and login to Azure:
 ```
@@ -190,7 +190,7 @@ $ az account set --subscription “<subscription id>”
 ```
 2. Create a new Resource Group for this workshop, which we’ll put the K8s (K8s is short for
     Kubernetes) cluster on – note, the Resource Group must be in eastus or another region that
-    support the AKS preview:
+    support K8s on ACS:
 ```
     $ az group create -l eastus - n ABC- K8s
 ```
@@ -259,7 +259,7 @@ You should be able to see your new repos on Docker Hub when you have finished.
     $ az acs kubernetes install-cli --install-location=C:\kubectl\kubectl.exe
 ```
 11. Put kubectl on your PATH.
-12. Get the key that will enable you to interact directly with AKS from the command line:
+12. Get the key that will enable you to interact directly with ACS from the command line:
 ```
     $ az acs kubernetes get-credentials --resource-group=ABC-K8s --name=ABC-Kube-Cluster
 ```
@@ -276,7 +276,7 @@ You should see the output as follows:
     You should see output as follows: “Starting to serve on 127.0.0.1:8001”
     Browse to [http://localhost:8001/ui](http://localhost:8001/ui)
 
-### Deploy our microservice to AKS
+### Deploy our microservice to ACS
 
 14. Add a deployment file that we will use to upload to Kubernetes – I called mine
     dockerdemo.yml:
@@ -302,7 +302,7 @@ image: <your docker hub namespace>/inventorydb:latest
 ports:
 - containerPort: 1433
 ```
-15. Deploy to AKS:
+15. Deploy to ACS:
 ```
 $ kubectrl apply -f dockerdemo.yml
 ```
@@ -322,7 +322,7 @@ $ kubectl get services
 
 ## Workshop 3 – Make your own Container Registry (ACR)
 
-We’re going to make our own container registry on ACR, push our images to it and connect our AKS
+We’re going to make our own container registry on ACR, push our images to it and connect our ACS
 instance to it...
 
 

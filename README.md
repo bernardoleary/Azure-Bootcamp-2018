@@ -3,20 +3,35 @@
 ## Contents
 
 Prereqs ........................................................................... 1
+
 Getting started ................................................................... 1
+
 Workshop 1 – Inventory “microservice” on Docker ................................... 4
+
 Run a SQL Server container ........................................................ 4
+
 Get an API going .................................................................. 4
+
 Add Docker Support ................................................................ 5
+
 Take a copy of the DB and reset ................................................... 7
+
 Add docker-compose support ........................................................ 8
+
 Workshop 2 – Push the Inventory microservice to ACS ............................... 8
+
 Deploy an ACS cluster ............................................................. 8
+
 Set up your Docker Hub account .................................................... 9
+
 Make a release build of the microservice API ...................................... 9
+
 Push your images to Docker Hub .................................................... 10
+
 Set up the KubeCtl tool ........................................................... 11
+
 Deploy our microservice to ACS .................................................... 12
+
 Workshop 3 – Make your own Container Registry (ACR) ............................... 13
 
 ## Prereqs
